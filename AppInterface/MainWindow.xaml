@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppInterface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Obfuskator C#" Height="500" Width="800">
     <Grid>
+        <TabControl x:Name="tabControl">
+            <TabItem Header="Obfuskator">
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock x:Name="tab_name_tb" HorizontalAlignment="Center" Margin="0,30,0,0" Text="Obfuskator C#" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+                    <Button x:Name="input_path_btn" Click="input_path_btn_Click" Content="Wybierz lokalizację wejściową..." HorizontalAlignment="Center" Height="30" Margin="0,89,0,0" VerticalAlignment="Top" Width="246"/>
+                    <Button x:Name="output_path_btn" Click="output_path_btn_Click" Content="Wybierz lokalizację wyjściową..." HorizontalAlignment="Center" Height="30" Margin="0,144,0,0" VerticalAlignment="Top" Width="246"/>
+                    <Button x:Name="start_btn" Click="start_btn_Click" Content="Start" HorizontalAlignment="Center" Height="30" Margin="0,362,0,0" VerticalAlignment="Top" Width="150"/>
+                    <StackPanel Width="400" Orientation="Vertical" Margin="197,203,197,67">
+                        <TextBlock HorizontalAlignment="Center" Text="Wybór algorytmów" />
+                        <CheckBox HorizontalAlignment="Left" Content="Wstawianie pustych instrukcji" />
+                        <CheckBox HorizontalAlignment="Left" Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" />
+                        <CheckBox HorizontalAlignment="Left" Content="Rozszerzanie wyrażeń, zwłaszcza liczbowych" />
+                        <CheckBox HorizontalAlignment="Left" Content="Wstrzykiwanie martwego kodu" />
+                        <CheckBox HorizontalAlignment="Left" Content="Zmiana systemu dziesiętnego na inne" />
+                        <CheckBox HorizontalAlignment="Left" Content="Zastąpienie operatorów" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Detektor">
+                <Grid Background="#000000"/>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>
