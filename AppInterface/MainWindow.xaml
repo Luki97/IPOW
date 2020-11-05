@@ -10,25 +10,39 @@
         <TabControl x:Name="tabControl">
             <TabItem Header="Obfuskator">
                 <Grid Background="#FFE5E5E5">
-                    <TextBlock x:Name="tab_name_tb" HorizontalAlignment="Center" Margin="0,30,0,0" Text="Obfuskator C#" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock x:Name="tab_name_tb" HorizontalAlignment="Center" Margin="0,30,0,0" Text="Obfuskator C#" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" />
                     <Button x:Name="input_path_btn" Click="input_path_btn_Click" Content="Wybierz lokalizację wejściową..." HorizontalAlignment="Center" Height="30" Margin="0,89,0,0" VerticalAlignment="Top" Width="246"/>
                     <Button x:Name="output_path_btn" Click="output_path_btn_Click" Content="Wybierz lokalizację wyjściową..." HorizontalAlignment="Center" Height="30" Margin="0,144,0,0" VerticalAlignment="Top" Width="246"/>
-                    <Button x:Name="start_btn" Click="start_btn_Click" Content="Start" HorizontalAlignment="Center" Height="30" Margin="0,362,0,0" VerticalAlignment="Top" Width="150"/>
-                    <StackPanel Width="400" Orientation="Vertical" Margin="197,203,197,67">
-                        <TextBlock HorizontalAlignment="Center" Text="Wybór algorytmów" />
-                        <CheckBox HorizontalAlignment="Left" Content="Wstawianie pustych instrukcji" />
-                        <CheckBox HorizontalAlignment="Left" Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" />
-                        <CheckBox HorizontalAlignment="Left" Content="Rozszerzanie wyrażeń, zwłaszcza liczbowych" />
-                        <CheckBox HorizontalAlignment="Left" Content="Wstrzykiwanie martwego kodu" />
-                        <CheckBox HorizontalAlignment="Left" Content="Zmiana systemu dziesiętnego na inne" />
-                        <CheckBox HorizontalAlignment="Left" Content="Zastąpienie operatorów" />
+                    <Button x:Name="start_btn" Click="start_btn_Click" Content="Start" HorizontalAlignment="Center" Height="30" Margin="0,362,0,0" VerticalAlignment="Top" Width="150" />
+                    <StackPanel Orientation="Vertical" Margin="145,203,145,67">
+                        <TextBlock HorizontalAlignment="Center" Text="Wybór algorytmów" FontSize="18" />
+                        <CheckBox Content="Wstawianie pustych instrukcji" FontSize="14" />
+                        <CheckBox HorizontalAlignment="Left" Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" FontSize="14" />
+                        <CheckBox HorizontalAlignment="Left" Content="Rozszerzanie wyrażeń, zwłaszcza liczbowych" FontSize="14" />
+                        <CheckBox HorizontalAlignment="Left" Content="Wstrzykiwanie martwego kodu" FontSize="14" />
+                        <CheckBox HorizontalAlignment="Left" Content="Zmiana systemu dziesiętnego na inne" FontSize="14"/>
+                        <CheckBox HorizontalAlignment="Left" Content="Zastąpienie operatorów" FontSize="14" />
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Detektor">
-                <Grid Background="#000000"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="49*"/>
+                        <ColumnDefinition Width="745*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="tab_name_tb_detector" HorizontalAlignment="Center" Margin="0,30,0,0" Text="Detektor obfuskacji C#" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1"/>
+                    <Button Content="Wybierz lokalizację wejściową..." Grid.Column="1" HorizontalAlignment="Center" Margin="0,73,0,0" VerticalAlignment="Top" Width="241" Height="28" Click="Button_Click"/>
+                    <Button Content="Strat" Grid.Column="1" HorizontalAlignment="Center" Height="29" Margin="0,358,0,0" VerticalAlignment="Top" Width="136"/>
+                    <CheckBox Content="Wstawianie pustych instrukcji" Grid.Column="1" HorizontalAlignment="Center" Height="19" Margin="0,160,0,0" VerticalAlignment="Top" Width="250" FontSize="14"/>
+                    <CheckBox Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" Grid.Column="1" HorizontalAlignment="Center" Height="19" Margin="0,190,0,0" VerticalAlignment="Top" Width="250" FontSize="14"/>
+                    <CheckBox Content="Rozszerzanie wyrażeń, zwłaszcza liczbowych" Grid.Column="1" HorizontalAlignment="Center" Height="19" Margin="0,220,0,0" VerticalAlignment="Top" Width="250" FontSize="14"/>
+                    <CheckBox Content="Wstrzykiwanie martwego kodu" Grid.Column="1" HorizontalAlignment="Center" Height="19" Margin="0,250,0,0" VerticalAlignment="Top" Width="250" FontSize="14"/>
+                    <CheckBox Content="Zmiana systemu dziesiętnego na inne" Grid.Column="1" HorizontalAlignment="Center" Height="19" Margin="0,280,0,0" VerticalAlignment="Top" Width="250" FontSize="14"/>
+                    <CheckBox Content="Zastąpienie operatorów" Grid.Column="1" HorizontalAlignment="Center" Height="19" Margin="0,310,0,0" VerticalAlignment="Top" Width="250" FontSize="14"/>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="17"><Run Language="pl-pl" Text="Wybór algoytmu:"/><LineBreak/><Run Language="pl-pl"/></TextBlock>
+                </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>

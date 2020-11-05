@@ -51,5 +51,11 @@ namespace AppInterface
         {
             File.WriteAllText(outputPath, fileContent);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            input_path_btn_Click(sender, e);
+
+        }
     }
 }
