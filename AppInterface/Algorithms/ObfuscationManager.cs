@@ -20,6 +20,13 @@ namespace AppInterface.Algorithms
             this.root = syntaxTree.GetCompilationUnitRoot();
         }
 
+        public void InsertDeadCodeIntoMethods()
+        {
+            InsertDeadCodeIntoMethods rewriter = new InsertDeadCodeIntoMethods();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Dead code insertion");
+        }
+
         public void ChangeNumericTypes()
         {
             NumericTypesRewrite rewriter = new NumericTypesRewrite();
@@ -28,7 +35,7 @@ namespace AppInterface.Algorithms
 
         public String GetSourceCode()
         {
-            return root.ToFullString();
+            return root.NormalizeWhitespace().ToFullString();
         }
 
     }
