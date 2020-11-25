@@ -51,6 +51,12 @@ namespace AppInterface
         private void start_btn_Click(object sender, RoutedEventArgs e)
         {
             ObfuscationManager om = new ObfuscationManager(fileContent);
+
+            if ((bool)cbInsertDeadCode.IsChecked)
+            {
+                om.InsertDeadCodeIntoMethods();
+            }
+
             if ((bool)cbNumericTypeChange.IsChecked)
             {
                 om.ChangeNumericTypes();
