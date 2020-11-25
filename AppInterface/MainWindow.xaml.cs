@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using AppInterface.Algorithms;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +50,13 @@ namespace AppInterface
 
         private void start_btn_Click(object sender, RoutedEventArgs e)
         {
+            ObfuscationManager om = new ObfuscationManager(fileContent);
+            if ((bool)cbNumericTypeChange.IsChecked)
+            {
+                om.ChangeNumericTypes();
+            }
+
+            fileContent = om.GetSourceCode();
             File.WriteAllText(outputPath, fileContent);
         }
 
