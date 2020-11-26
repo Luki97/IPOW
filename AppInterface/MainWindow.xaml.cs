@@ -1,20 +1,8 @@
 ﻿using AppInterface.Algorithms;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AppInterface
 {
@@ -52,14 +40,20 @@ namespace AppInterface
         {
             ObfuscationManager om = new ObfuscationManager(fileContent);
 
-            if ((bool)cbInsertDeadCode.IsChecked)
+            if (cbInsertDeadCode.IsChecked ?? false)
             {
                 om.InsertDeadCodeIntoMethods();
             }
 
-            if ((bool)cbNumericTypeChange.IsChecked)
+            if (cbNumericTypeChange.IsChecked ?? false)
             {
                 om.ChangeNumericTypes();
+            }
+
+            if(cbChangeNames.IsChecked ?? false)
+            {
+                om.ChangeMethodNames();
+                om.ChangeClassNames();
             }
 
             fileContent = om.GetSourceCode();
