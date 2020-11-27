@@ -2,10 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace AppInterface.Algorithms
 {
@@ -31,6 +28,23 @@ namespace AppInterface.Algorithms
         {
             NumericTypesRewrite rewriter = new NumericTypesRewrite();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Numeric types change");
+        }
+
+        public void ChangeMethodNames()
+        {
+            MethodNamesChanger rewriter = new MethodNamesChanger();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            root = SyntaxFactory.ParseCompilationUnit(rewriter.changeMethodNamesInClass(root.ToFullString()));
+            Trace.WriteLine("Method names change");
+        }
+        public void ChangeClassNames()
+        {
+            ClassNamesChanger rewriter = new ClassNamesChanger();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            root = SyntaxFactory.ParseCompilationUnit(rewriter.changeClassNames(root.ToFullString()));
+            root = SyntaxFactory.ParseCompilationUnit(rewriter.changeFieldNames(root.ToFullString()));
+            Trace.WriteLine("Class names change");
         }
 
         public String GetSourceCode()

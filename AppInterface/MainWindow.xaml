@@ -17,10 +17,10 @@
                     <StackPanel Orientation="Vertical" Margin="145,203,145,67">
                         <TextBlock HorizontalAlignment="Center" Text="Wybór algorytmów" FontSize="18" />
                         <CheckBox HorizontalAlignment="Left" Content="Wstawianie pustych instrukcji" FontSize="14" />
-                        <CheckBox HorizontalAlignment="Left" Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" FontSize="14" />
+                        <CheckBox Name="cbChangeNames" HorizontalAlignment="Left" Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" FontSize="14" />
                         <CheckBox HorizontalAlignment="Left" Content="Rozszerzanie wyrażeń, zwłaszcza liczbowych" FontSize="14" />
                         <CheckBox Name="cbInsertDeadCode" HorizontalAlignment="Left" Content="Wstrzykiwanie martwego kodu" FontSize="14" />
-                            <CheckBox Name="cbNumericTypeChange" HorizontalAlignment="Left" Content="Zmiana systemu dziesiętnego na inne" FontSize="14"/>
+                        <CheckBox Name="cbNumericTypeChange" HorizontalAlignment="Left" Content="Zmiana systemu dziesiętnego na inne" FontSize="14"/>
                         <CheckBox HorizontalAlignment="Left" Content="Zastąpienie operatorów" FontSize="14" />
                     </StackPanel>
                 </Grid>
