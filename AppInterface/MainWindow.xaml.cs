@@ -1,4 +1,5 @@
 ﻿using AppInterface.Algorithms;
+using AppInterface.WindowComponents;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -11,6 +12,14 @@ namespace AppInterface
     /// </summary>
     public partial class MainWindow : Window
     {
+        // -----------------------------------------------------
+        // Display
+
+        private readonly AlgorithmCheckboxUtils checkboxUtils;
+
+        // -----------------------------------------------------
+        // Logic
+
         private const string FILE_FILTER = "C# file (*.cs)|*.cs";
         private String fileContent;
         private String outputPath;
@@ -18,6 +27,21 @@ namespace AppInterface
         public MainWindow()
         {
             InitializeComponent();
+
+            this.checkboxUtils = new AlgorithmCheckboxUtils(listAlgorithms, cbSelectAll);
+
+            PopulateAlgorithmList();
+            cbSelectAll.Click += this.checkboxUtils.ToggleSelectAll;
+        }
+
+        private void PopulateAlgorithmList()
+        {
+            listAlgorithms.Items.Clear();
+
+            foreach (var algorithmType in AlgorithmType.Values)
+            {
+                listAlgorithms.Items.Add(this.checkboxUtils.CreateCheckbox(algorithmType));
+            }
         }
 
         private void input_path_btn_Click(object sender, RoutedEventArgs e)

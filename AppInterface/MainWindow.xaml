@@ -14,14 +14,12 @@
                     <Button x:Name="input_path_btn" Click="input_path_btn_Click" Content="Wybierz lokalizację wejściową..." HorizontalAlignment="Center" Height="30" Margin="0,89,0,0" VerticalAlignment="Top" Width="246"/>
                     <Button x:Name="output_path_btn" Click="output_path_btn_Click" Content="Wybierz lokalizację wyjściową..." HorizontalAlignment="Center" Height="30" Margin="0,144,0,0" VerticalAlignment="Top" Width="246"/>
                     <Button x:Name="start_btn" Click="start_btn_Click" Content="Start" HorizontalAlignment="Center" Height="30" Margin="0,362,0,0" VerticalAlignment="Top" Width="150" />
-                    <StackPanel Orientation="Vertical" Margin="145,203,145,67">
-                        <TextBlock HorizontalAlignment="Center" Text="Wybór algorytmów" FontSize="18" />
-                        <CheckBox HorizontalAlignment="Left" Content="Wstawianie pustych instrukcji" FontSize="14" />
-                        <CheckBox Name="cbChangeNames" HorizontalAlignment="Left" Content="Zmienianie nazw klas i zmiennych na mniej czytelne / przypadkowe" FontSize="14" />
-                        <CheckBox HorizontalAlignment="Left" Content="Rozszerzanie wyrażeń, zwłaszcza liczbowych" FontSize="14" />
-                        <CheckBox Name="cbInsertDeadCode" HorizontalAlignment="Left" Content="Wstrzykiwanie martwego kodu" FontSize="14" />
-                        <CheckBox Name="cbNumericTypeChange" HorizontalAlignment="Left" Content="Zmiana systemu dziesiętnego na inne" FontSize="14"/>
-                        <CheckBox HorizontalAlignment="Left" Content="Zastąpienie operatorów" FontSize="14" />
+                    <StackPanel HorizontalAlignment="Left" Width="254">
+                        <Label FontSize="18                            " Content="Wybór algorytmów&#xA;"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="95" Width="254" RenderTransformOrigin="0.5,0.795"/>
+                        <CheckBox x:Name="cbSelectAll" Height="33" Content="Zazncz wszystko" FontSize="14" HorizontalAlignment="Center" Width="132" IsThreeState="True"/>
+                        <ItemsControl x:Name="listAlgorithms"  Background="Transparent" MaxWidth="270" Height="380" Width="253" BorderThickness="0,1,0,0" Padding="15" BorderBrush="#FFCCCCCC">
+                            <CheckBox Content="Algorytm1" FontSize="14"/>
+                        </ItemsControl>
                     </StackPanel>
                 </Grid>
             </TabItem>
