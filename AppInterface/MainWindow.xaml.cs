@@ -1,9 +1,11 @@
 ﻿using AppInterface.Algorithms;
 using AppInterface.WindowComponents;
 using Microsoft.Win32;
-using System;
 using System.IO;
 using System.Windows;
+using System.Linq;
+using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace AppInterface
 {
@@ -12,6 +14,7 @@ namespace AppInterface
     /// </summary>
     public partial class MainWindow : Window
     {
+
         // -----------------------------------------------------
         // Display
 
@@ -21,8 +24,8 @@ namespace AppInterface
         // Logic
 
         private const string FILE_FILTER = "C# file (*.cs)|*.cs";
-        private String fileContent;
-        private String outputPath;
+        public string CodeIn { get; private set; } = "";
+        public string CodeOut { get; private set; } = "";
 
         public MainWindow()
         {
@@ -49,7 +52,10 @@ namespace AppInterface
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = FILE_FILTER;
             if (openFileDialog.ShowDialog() == true)
-                fileContent = File.ReadAllText(openFileDialog.FileName);
+            {
+                CodeIn = File.ReadAllText(openFileDialog.FileName);
+                tboxCodeIn.Text = CodeIn;
+            }
         }
 
         private void output_path_btn_Click(object sender, RoutedEventArgs e)
@@ -57,31 +63,44 @@ namespace AppInterface
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = FILE_FILTER;
             if (saveFileDialog.ShowDialog() == true)
-                outputPath = saveFileDialog.FileName;
+            {
+                File.WriteAllText(saveFileDialog.FileName, CodeOut);
+            }
         }
 
         private void start_btn_Click(object sender, RoutedEventArgs e)
         {
-            ObfuscationManager om = new ObfuscationManager(fileContent);
+            ObfuscationManager om = new ObfuscationManager(CodeIn);
 
-            if (cbInsertDeadCode.IsChecked ?? false)
+            var algorithms = TakeCheckedAlgorithms();
+
+            foreach (var algorithm in algorithms)
             {
-                om.InsertDeadCodeIntoMethods();
+                om.Obfuscate(algorithm);
             }
 
-            if (cbNumericTypeChange.IsChecked ?? false)
-            {
-                om.ChangeNumericTypes();
-            }
+            CodeOut = om.GetSourceCode();
+            tboxCodeOut.Text = CodeOut;
+        }
 
-            if(cbChangeNames.IsChecked ?? false)
-            {
-                om.ChangeMethodNames();
-                om.ChangeClassNames();
-            }
+        private IEnumerable<Algorithm> TakeCheckedAlgorithms()
+        {
+            return from cb in listAlgorithms.Items.Cast<CheckBox>()
+                   where cb.IsEnabled && (cb.IsChecked ?? false)
+                   select (Algorithm) cb.Tag;
+        }
 
-            fileContent = om.GetSourceCode();
-            File.WriteAllText(outputPath, fileContent);
+        public void ClearCodeOut(object sender, RoutedEventArgs e)
+        {
+            CodeOut = "";
+            tboxCodeOut.Text = CodeOut;
+        }
+
+        public void MoveObfuscatedCode(object sender, RoutedEventArgs e)
+        {
+            CodeIn = CodeOut;
+            tboxCodeIn.Text = CodeIn;
+            ClearCodeOut(null, null);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
