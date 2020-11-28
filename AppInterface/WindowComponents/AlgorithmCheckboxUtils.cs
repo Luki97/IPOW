@@ -10,8 +10,8 @@ namespace AppInterface.WindowComponents
 {
     class AlgorithmCheckboxUtils
     {
-        CheckBox cbSelectAll;
-        ItemsControl listAlgorithms;
+        readonly CheckBox cbSelectAll;
+        readonly ItemsControl listAlgorithms;
 
         public AlgorithmCheckboxUtils(ItemsControl listAlgorithms, CheckBox cbSelectAll)
         {
@@ -24,13 +24,27 @@ namespace AppInterface.WindowComponents
             var cb = new CheckBox
             {
                 Content = CreateTextBox(algorithmType),
-                IsEnabled = algorithmType.IsEnabled
+                IsEnabled = algorithmType.IsEnabled,
+                Tag = algorithmType.Algorithm,
+                Margin = new Thickness(3),
             };
 
             cb.Checked += OneChecked;
             cb.Unchecked += OneUnchecked;
 
             return cb;
+        }
+
+        private TextBlock CreateTextBox(AlgorithmType algorithmType)
+        {
+            return new TextBlock
+            {
+                Text = algorithmType.Text,
+                Background = Brushes.Transparent,
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 14,
+                IsEnabled = algorithmType.IsEnabled
+            };
         }
 
         private void OneUnchecked(object sender, RoutedEventArgs e)
@@ -55,19 +69,6 @@ namespace AppInterface.WindowComponents
             {
                 cbSelectAll.IsChecked = true;
             }
-        }
-
-        private TextBlock CreateTextBox(AlgorithmType algorithmType)
-        {
-            return new TextBlock
-            {
-                Text = algorithmType.Text,
-                Background = Brushes.Transparent,
-                TextWrapping = TextWrapping.Wrap,
-                FontSize = 14,
-                Width = listAlgorithms.Width - 55,
-                IsEnabled = algorithmType.IsEnabled
-            };
         }
 
         public void ToggleSelectAll(object sender, RoutedEventArgs e)
