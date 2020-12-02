@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
 using System.Diagnostics;
 
 namespace AppInterface.Algorithms
@@ -11,7 +10,7 @@ namespace AppInterface.Algorithms
 
         private CompilationUnitSyntax root;
 
-        public ObfuscationManager(String sourceCode)
+        public ObfuscationManager(string sourceCode)
         {
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             this.root = syntaxTree.GetCompilationUnitRoot();
@@ -47,10 +46,35 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Class names change");
         }
 
-        public String GetSourceCode()
+        public string GetSourceCode()
         {
             return root.NormalizeWhitespace().ToFullString();
         }
 
+        public void Obfuscate(Algorithm algorithm)
+        {
+            switch (algorithm)
+            {
+                case Algorithm.EmptyInstructions:
+                    break;
+                case Algorithm.ChangeClassAndMethodNames:
+                    ChangeMethodNames();
+                    ChangeClassNames();
+
+                    break;
+                case Algorithm.ExtendExpresions:
+                    break;
+                case Algorithm.DeadCodeInjection:
+                    InsertDeadCodeIntoMethods();
+
+                    break;
+                case Algorithm.ChangeNumberBase:
+                    ChangeNumericTypes();
+
+                    break;
+                case Algorithm.ReplaceOperators:
+                    break;
+            }
+        }
     }
 }
