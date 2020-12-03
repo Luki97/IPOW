@@ -46,6 +46,13 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Class names change");
         }
 
+        public void ChangeIntToBinaryExpression()
+        {
+            NumberToBinaryExpression rewriter = new NumberToBinaryExpression();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Numeric types change");
+        }
+
         public string GetSourceCode()
         {
             return root.NormalizeWhitespace().ToFullString();
@@ -73,6 +80,8 @@ namespace AppInterface.Algorithms
 
                     break;
                 case Algorithm.ReplaceOperators:
+                    ChangeIntToBinaryExpression();
+
                     break;
             }
         }
