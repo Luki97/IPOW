@@ -32,8 +32,8 @@ namespace AppInterface.WindowComponents
 
         public static readonly AlgorithmType ReplaceOperators = new AlgorithmType(
             Algorithm.ReplaceOperators,
-            "Zastąpienie operatorów",
-            false);
+            "Zastąpienie literałów liczbowych wyrażeniami bitowymi",
+            true);
 
         public static IEnumerable<AlgorithmType> Values
         {
@@ -43,8 +43,8 @@ namespace AppInterface.WindowComponents
                 yield return ChangeClassAndMethodNames;
                 yield return ExtendExpresions;
                 yield return DeadCodeInjection;
-                yield return ChangeNumberBase;
                 yield return ReplaceOperators;
+                yield return ChangeNumberBase;
             }
         }
 
