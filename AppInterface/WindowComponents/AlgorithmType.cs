@@ -35,6 +35,11 @@ namespace AppInterface.WindowComponents
             "Zastąpienie literałów liczbowych wyrażeniami bitowymi",
             true);
 
+        public static readonly AlgorithmType CypherComments = new AlgorithmType(
+            Algorithm.CypherComments,
+            "Szyfrowanie komentarzy", 
+            true);
+
         public static IEnumerable<AlgorithmType> Values
         {
             get
@@ -45,6 +50,7 @@ namespace AppInterface.WindowComponents
                 yield return DeadCodeInjection;
                 yield return ReplaceOperators;
                 yield return ChangeNumberBase;
+                yield return CypherComments;
             }
         }
 

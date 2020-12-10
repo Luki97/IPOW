@@ -46,11 +46,18 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Class names change");
         }
 
-        public void ChangeIntToBinaryExpression()
+         public void ChangeIntToBinaryExpression()
         {
             NumberToBinaryExpression rewriter = new NumberToBinaryExpression();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Numeric types change");
+        }
+
+        public void CypherComments()
+        {
+            SingleLineCommentsRewrite rewriter = new SingleLineCommentsRewrite();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Cyphering comments");
         }
 
         public string GetSourceCode()
@@ -67,21 +74,21 @@ namespace AppInterface.Algorithms
                 case Algorithm.ChangeClassAndMethodNames:
                     ChangeMethodNames();
                     ChangeClassNames();
-
                     break;
                 case Algorithm.ExtendExpresions:
                     break;
                 case Algorithm.DeadCodeInjection:
                     InsertDeadCodeIntoMethods();
-
                     break;
                 case Algorithm.ChangeNumberBase:
                     ChangeNumericTypes();
-
                     break;
                 case Algorithm.ReplaceOperators:
+                    case Algorithm.ReplaceOperators:
                     ChangeIntToBinaryExpression();
-
+                    break;
+                case Algorithm.CypherComments:
+                    CypherComments();
                     break;
             }
         }

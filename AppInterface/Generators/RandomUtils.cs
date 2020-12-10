@@ -28,6 +28,12 @@ namespace AppInterface.Algorithms
             var ints = Convert.ToInt32(Regex.Match(Guid.NewGuid().ToString(), @"\d+").Value);
             return new Random(ints).Next(0, 99999999);
         }
+        public static int generateIntInAlphabetRange()
+        {
+            var ints = Convert.ToInt32(Regex.Match(Guid.NewGuid().ToString(), @"\d+").Value);
+            return new Random(ints).Next(1, 26);
+
+        }
         public static int GenerateLittleInt()
         {
             var ints = Convert.ToInt32(Regex.Match(Guid.NewGuid().ToString(), @"\d+").Value);
