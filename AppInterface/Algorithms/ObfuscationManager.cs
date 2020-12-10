@@ -84,7 +84,6 @@ namespace AppInterface.Algorithms
                     ChangeNumericTypes();
                     break;
                 case Algorithm.ReplaceOperators:
-                    case Algorithm.ReplaceOperators:
                     ChangeIntToBinaryExpression();
                     break;
                 case Algorithm.CypherComments:
