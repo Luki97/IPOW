@@ -15,7 +15,6 @@ namespace AppInterface.Algorithms
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             this.root = syntaxTree.GetCompilationUnitRoot();
         }
-
         public void InsertDeadCodeIntoMethods()
         {
             InsertDeadCodeIntoMethods rewriter = new InsertDeadCodeIntoMethods();
@@ -46,6 +45,19 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Class names change");
         }
 
+        public void InsertUnusedSemicolonsIntoMethods()
+        {
+            InsertSemicolonsIntoMethods rewriter = new InsertSemicolonsIntoMethods();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Unused semicolons insertion");
+        }
+        public void NumberExpressionsExtension()
+        {
+            NumberExtensionRewrite rewriter = new NumberExtensionRewrite();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Number expression extension");
+        }
+
         public string GetSourceCode()
         {
             return root.NormalizeWhitespace().ToFullString();
@@ -56,6 +68,7 @@ namespace AppInterface.Algorithms
             switch (algorithm)
             {
                 case Algorithm.EmptyInstructions:
+                    InsertUnusedSemicolonsIntoMethods();
                     break;
                 case Algorithm.ChangeClassAndMethodNames:
                     ChangeMethodNames();
@@ -63,6 +76,7 @@ namespace AppInterface.Algorithms
 
                     break;
                 case Algorithm.ExtendExpresions:
+                    NumberExpressionsExtension();
                     break;
                 case Algorithm.DeadCodeInjection:
                     InsertDeadCodeIntoMethods();

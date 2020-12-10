@@ -8,7 +8,7 @@ namespace AppInterface.WindowComponents
         public static readonly AlgorithmType EmptyInstructions = new AlgorithmType(
             Algorithm.EmptyInstructions,
             "Wstawianie pustych instrukcji",
-            false);
+            true);
 
         public static readonly AlgorithmType ChangeClassAndMethodNames = new AlgorithmType(
             Algorithm.ChangeClassAndMethodNames,
@@ -18,7 +18,7 @@ namespace AppInterface.WindowComponents
         public static readonly AlgorithmType ExtendExpresions = new AlgorithmType(
             Algorithm.ExtendExpresions,
             "Rozszerzanie wyrażeń, zwłaszcza liczbowych",
-            false);
+            true);
 
         public static readonly AlgorithmType DeadCodeInjection = new AlgorithmType(
             Algorithm.DeadCodeInjection,
@@ -39,12 +39,12 @@ namespace AppInterface.WindowComponents
         {
             get
             {
-                yield return EmptyInstructions;
                 yield return ChangeClassAndMethodNames;
                 yield return ExtendExpresions;
                 yield return DeadCodeInjection;
                 yield return ChangeNumberBase;
                 yield return ReplaceOperators;
+                yield return EmptyInstructions;
             }
         }
 

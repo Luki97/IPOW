@@ -27,4 +27,9 @@ public class StatementGenerator
     {
         return SyntaxFactory.ParseStatement(RandomUtils.generateUnusedintegerDeclaration());
     }
+
+    public static StatementSyntax GenerateSemicolons()
+    {
+        return SyntaxFactory.ParseStatement(RandomUtils.generateRandomUnusedSeparators());
+    }
 }
