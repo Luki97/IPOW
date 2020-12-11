@@ -11,6 +11,7 @@ namespace AppInterface.Algorithms
         ExtendExpresions,
         DeadCodeInjection,
         ChangeNumberBase,
-        ReplaceOperators
+        ReplaceOperators,
+        CypherComments
     }
 }
