@@ -7,23 +7,16 @@ namespace AppInterface.Algorithms
 {
     class NumberExtensionRewrite : CSharpSyntaxRewriter
     {
-        public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
-        {
-            if (node.Kind().Equals(SyntaxKind.NumericLiteralExpression))
-            {
-                //System.Diagnostics.Trace.WriteLine(node.Parent.Kind() + " -> " + node.Parent.ToFullString());
-            }
-            return base.VisitLiteralExpression(node);
-        }
 
         public override SyntaxNode VisitArgument(ArgumentSyntax node)
         {
             if (node.Expression.Kind().Equals(SyntaxKind.NumericLiteralExpression))
             {
-                NumbersExtension ne = new NumbersExtension();
-                ArgumentSyntax newNode = node.WithExpression(ne.ExtendNumber((LiteralExpressionSyntax)node.Expression));
+                NumberOperations ne = new NumberOperations();
+                LiteralExpressionSyntax les = (LiteralExpressionSyntax) node.Expression;
+                ExpressionSyntax es = SyntaxFactory.ParseExpression(ne.UnwrapNumber(les.Token.ValueText));
+                ArgumentSyntax newNode = node.WithExpression(es);
                 return base.VisitArgument(node.ReplaceNode(node, newNode));
-
             }
             return base.VisitArgument(node);
         }
@@ -32,8 +25,10 @@ namespace AppInterface.Algorithms
         {
             if (node.Value.Kind().Equals(SyntaxKind.NumericLiteralExpression))
             {
-                NumbersExtension ne = new NumbersExtension();
-                EqualsValueClauseSyntax newNode = node.WithValue(ne.ExtendNumber((LiteralExpressionSyntax)node.Value));
+                NumberOperations ne = new NumberOperations();
+                LiteralExpressionSyntax les = (LiteralExpressionSyntax) node.Value;
+                ExpressionSyntax es = SyntaxFactory.ParseExpression(ne.UnwrapNumber(les.Token.ValueText));
+                EqualsValueClauseSyntax newNode = node.WithValue(es);
                 return base.VisitEqualsValueClause(node.ReplaceNode(node, newNode));
             }
             return base.VisitEqualsValueClause(node);
@@ -43,8 +38,10 @@ namespace AppInterface.Algorithms
         {
             if (node.Right.Kind().Equals(SyntaxKind.NumericLiteralExpression))
             {
-                NumbersExtension ne = new NumbersExtension();
-                AssignmentExpressionSyntax newNode = node.WithRight(ne.ExtendNumber((LiteralExpressionSyntax)node.Right));
+                NumberOperations ne = new NumberOperations();
+                LiteralExpressionSyntax les = (LiteralExpressionSyntax) node.Right;
+                ExpressionSyntax es = SyntaxFactory.ParseExpression(ne.UnwrapNumber(les.Token.ValueText));
+                AssignmentExpressionSyntax newNode = node.WithRight(es);
                 return base.VisitAssignmentExpression(node.ReplaceNode(node, newNode));
             }
             return base.VisitAssignmentExpression(node);

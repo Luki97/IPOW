@@ -37,7 +37,7 @@ namespace AppInterface.Algorithms
         public static int GenerateLittleInt()
         {
             var ints = Convert.ToInt32(Regex.Match(Guid.NewGuid().ToString(), @"\d+").Value);
-            return new Random(ints).Next(0, 99);
+            return new Random(ints).Next(1, 99);
         }
         public static String generateRandomUnusedSeparators()
         {
