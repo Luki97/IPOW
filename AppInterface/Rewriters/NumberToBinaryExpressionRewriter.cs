@@ -5,7 +5,7 @@ using AppInterface.Generators;
 
 namespace AppInterface.Algorithms
 {
-    class NumberToBinaryExpression : CSharpSyntaxRewriter
+    class NumberToBinaryExpressionRewriter : CSharpSyntaxRewriter
     {
         public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
         {

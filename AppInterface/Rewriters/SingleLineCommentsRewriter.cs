@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace AppInterface.Algorithms
 {
-    class SingleLineCommentsRewrite : CSharpSyntaxRewriter
+    class SingleLineCommentsRewriter : CSharpSyntaxRewriter
     {
 
         public override SyntaxTrivia VisitTrivia(SyntaxTrivia trivia)

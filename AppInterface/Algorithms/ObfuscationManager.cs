@@ -17,28 +17,28 @@ namespace AppInterface.Algorithms
         }
         public void InsertDeadCodeIntoMethods()
         {
-            InsertDeadCodeIntoMethods rewriter = new InsertDeadCodeIntoMethods();
+            InsertDeadCodeIntoMethodsRewriter rewriter = new InsertDeadCodeIntoMethodsRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Dead code insertion");
         }
 
         public void ChangeNumericTypes()
         {
-            NumericTypesRewrite rewriter = new NumericTypesRewrite();
+            NumericTypesRewriter rewriter = new NumericTypesRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Numeric types change");
         }
 
         public void ChangeMethodNames()
         {
-            MethodNamesChanger rewriter = new MethodNamesChanger();
+            MethodNamesRewriter rewriter = new MethodNamesRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             root = SyntaxFactory.ParseCompilationUnit(rewriter.changeMethodNamesInClass(root.ToFullString()));
             Trace.WriteLine("Method names change");
         }
         public void ChangeClassNames()
         {
-            ClassNamesChanger rewriter = new ClassNamesChanger();
+            ClassNamesRewriter rewriter = new ClassNamesRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             root = SyntaxFactory.ParseCompilationUnit(rewriter.changeClassNames(root.ToFullString()));
             root = SyntaxFactory.ParseCompilationUnit(rewriter.changeFieldNames(root.ToFullString()));
@@ -47,27 +47,27 @@ namespace AppInterface.Algorithms
 
         public void InsertUnusedSemicolonsIntoMethods()
         {
-            InsertSemicolonsIntoMethods rewriter = new InsertSemicolonsIntoMethods();
+            InsertSemicolonsIntoMethodsRewriter rewriter = new InsertSemicolonsIntoMethodsRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Unused semicolons insertion");
         }
-        public void NumberExpressionsExtension()
+        public void NumberUnwrapper()
         {
-            NumberExtensionRewrite rewriter = new NumberExtensionRewrite();
+            NumberUnwrapperObfuscator rewriter = new NumberUnwrapperObfuscator();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
-            Trace.WriteLine("Number expression extension");
+            Trace.WriteLine("Number unwrapper");
         }
 
          public void ChangeIntToBinaryExpression()
         {
-            NumberToBinaryExpression rewriter = new NumberToBinaryExpression();
+            NumberToBinaryExpressionRewriter rewriter = new NumberToBinaryExpressionRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Numeric types change");
         }
 
         public void CypherComments()
         {
-            SingleLineCommentsRewrite rewriter = new SingleLineCommentsRewrite();
+            SingleLineCommentsRewriter rewriter = new SingleLineCommentsRewriter();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Cyphering comments");
         }
@@ -89,7 +89,7 @@ namespace AppInterface.Algorithms
                     ChangeClassNames();
                     break;
                 case Algorithm.ExtendExpresions:
-                    NumberExpressionsExtension();
+                    NumberUnwrapper();
                     break;
                 case Algorithm.DeadCodeInjection:
                     InsertDeadCodeIntoMethods();

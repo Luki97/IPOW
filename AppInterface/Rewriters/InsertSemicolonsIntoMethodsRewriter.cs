@@ -4,16 +4,18 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AppInterface.Algorithms
 {
-    class InsertDeadCodeIntoMethods : CSharpSyntaxRewriter
+    class InsertSemicolonsIntoMethodsRewriter : CSharpSyntaxRewriter
     {
-
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             SyntaxList<StatementSyntax> blockWithNewStatements = node.Body.Statements;
 
-            for (int i = 0; i < RandomUtils.GenerateLittleInt(); i++)
+            for (int i = blockWithNewStatements.Count - 1; i >= 0; i--)
             {
-                blockWithNewStatements = blockWithNewStatements.Insert(0, StatementGenerator.GenerateSingleStatement());
+                for (int j = 0; j < RandomUtils.GenerateLittleInt(); j++)
+                {
+                    blockWithNewStatements = blockWithNewStatements.Insert(i, StatementGenerator.GenerateSemicolons());
+                }
             }
 
             BlockSyntax newBlock = SyntaxFactory.Block(blockWithNewStatements);
@@ -24,6 +26,5 @@ namespace AppInterface.Algorithms
 
             return base.VisitMethodDeclaration(newNode);
         }
-
     }
 }
