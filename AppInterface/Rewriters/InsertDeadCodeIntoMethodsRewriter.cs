@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AppInterface.Algorithms
 {
-    class InsertDeadCodeIntoMethods : CSharpSyntaxRewriter
+    class InsertDeadCodeIntoMethodsRewriter : CSharpSyntaxRewriter
     {
 
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)

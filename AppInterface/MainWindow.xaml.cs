@@ -68,7 +68,7 @@ namespace AppInterface
             }
         }
 
-        private void start_btn_Click(object sender, RoutedEventArgs e)
+        private void start_obfuscation_btn_Click(object sender, RoutedEventArgs e)
         {
             ObfuscationManager om = new ObfuscationManager(CodeIn);
 
@@ -80,6 +80,21 @@ namespace AppInterface
             }
 
             CodeOut = om.GetSourceCode();
+            tboxCodeOut.Text = CodeOut;
+        }
+
+        private void start_deobfuscation_btn_Click(object sender, RoutedEventArgs e)
+        {
+            DeobfuscationManager dm = new DeobfuscationManager(CodeIn);
+
+            var algorithms = TakeCheckedAlgorithms();
+
+            foreach(var algorithm in algorithms)
+            {
+                dm.Deobfuscate(algorithm);
+            }
+
+            CodeOut = dm.GetSourceCode();
             tboxCodeOut.Text = CodeOut;
         }
 
