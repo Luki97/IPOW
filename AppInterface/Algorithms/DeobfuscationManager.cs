@@ -1,4 +1,5 @@
 ﻿using AppInterface.Rewriters;
+using AppInterface.Rewriters.Deobfuscators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,6 +28,12 @@ namespace AppInterface.Algorithms
         {
             return root.NormalizeWhitespace().ToFullString();
         }
+        public void DecypherComments()
+        {
+            CommentCipherDeobfuscator rewriter = new CommentCipherDeobfuscator();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Decyphering comments");
+        }
 
         public void Deobfuscate(Algorithm algorithm)
         {
@@ -46,6 +53,7 @@ namespace AppInterface.Algorithms
                 case Algorithm.ReplaceOperators:
                     break;
                 case Algorithm.CypherComments:
+                    DecypherComments();
                     break;
             }
         }
