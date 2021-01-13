@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace AppInterface.Algorithms
 {
@@ -35,11 +36,19 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Decyphering comments");
         }
 
+        public void RemoveSemicolns()
+        {
+            SemicolnsIntoMethodsDeobfuscator rewritter = new SemicolnsIntoMethodsDeobfuscator();
+            root = (CompilationUnitSyntax)rewritter.Visit(CSharpSyntaxTree.ParseText(Regex.Replace(GetSourceCode(), @"\s+", " ").Trim()).GetRoot());
+
+        }
+
         public void Deobfuscate(Algorithm algorithm)
         {
             switch (algorithm)
             {
                 case Algorithm.EmptyInstructions:
+                    RemoveSemicolns();
                     break;
                 case Algorithm.ChangeClassAndMethodNames:
                     break;
