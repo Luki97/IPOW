@@ -25,6 +25,15 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Number wrapper");
         }
 
+        public void SimplifyingExpressions()
+        {
+            BitExpressionDeobfuscator rewriter = new BitExpressionDeobfuscator();
+            RedundantParentheses rewriter2 = new RedundantParentheses();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            root = (CompilationUnitSyntax)rewriter2.Visit(root);
+            Trace.WriteLine("Simplyfing expression");
+        }
+
         public string GetSourceCode()
         {
             return root.NormalizeWhitespace().ToFullString();
@@ -60,6 +69,7 @@ namespace AppInterface.Algorithms
                 case Algorithm.ChangeNumberBase:
                     break;
                 case Algorithm.ReplaceOperators:
+                    SimplifyingExpressions();
                     break;
                 case Algorithm.CypherComments:
                     DecypherComments();
