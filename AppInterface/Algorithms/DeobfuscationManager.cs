@@ -39,7 +39,7 @@ namespace AppInterface.Algorithms
         public void RemoveSemicolns()
         {
             SemicolnsIntoMethodsDeobfuscator rewritter = new SemicolnsIntoMethodsDeobfuscator();
-            root = (CompilationUnitSyntax)rewritter.Visit(CSharpSyntaxTree.ParseText(Regex.Replace(GetSourceCode(), @"\s+", " ").Trim()).GetRoot());
+            root = (CompilationUnitSyntax)rewritter.Visit(root);
 
         }
 
