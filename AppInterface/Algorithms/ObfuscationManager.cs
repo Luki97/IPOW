@@ -67,7 +67,7 @@ namespace AppInterface.Algorithms
 
         public void CypherComments()
         {
-            SingleLineCommentsRewriter rewriter = new SingleLineCommentsRewriter();
+            CommentCipherObfuscator rewriter = new CommentCipherObfuscator();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Cyphering comments");
         }

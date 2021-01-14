@@ -31,7 +31,7 @@ namespace AppInterface.Algorithms
         public static int generateIntInAlphabetRange()
         {
             var ints = Convert.ToInt32(Regex.Match(Guid.NewGuid().ToString(), @"\d+").Value);
-            return new Random(ints).Next(1, 26);
+            return new Random(ints).Next(1, 9);
 
         }
         public static int GenerateLittleInt()

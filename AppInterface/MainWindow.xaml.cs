@@ -6,6 +6,7 @@ using System.Windows;
 using System.Linq;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace AppInterface
 {
@@ -94,7 +95,7 @@ namespace AppInterface
                 dm.Deobfuscate(algorithm);
             }
 
-            CodeOut = dm.GetSourceCode();
+            CodeOut = Regex.Replace(dm.GetSourceCode(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline).TrimEnd(); ;
             tboxCodeOut.Text = CodeOut;
         }
 
