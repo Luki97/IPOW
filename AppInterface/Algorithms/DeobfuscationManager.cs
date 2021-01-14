@@ -50,8 +50,6 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Numeric types deobfuscation");
         }
 
-
-
         public void Deobfuscate(Algorithm algorithm)
         {
             switch (algorithm)
