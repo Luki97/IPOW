@@ -60,7 +60,7 @@ namespace AppInterface.Algorithms
 
          public void ChangeIntToBinaryExpression()
         {
-            NumberToBinaryExpressionRewriter rewriter = new NumberToBinaryExpressionRewriter();
+            NumberToBinaryExpressionObfuscator rewriter = new NumberToBinaryExpressionObfuscator();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Numeric types change");
         }

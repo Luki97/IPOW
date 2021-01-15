@@ -26,6 +26,15 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Number wrapper");
         }
 
+        public void SimplifyingExpressions()
+        {
+            BitExpressionDeobfuscator rewriter = new BitExpressionDeobfuscator();
+            RedundantParentheses rewriter2 = new RedundantParentheses();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            root = (CompilationUnitSyntax)rewriter2.Visit(root);
+            Trace.WriteLine("Simplyfing expression");
+        }
+
         public void DeadCodeAnnihilation()
         {
             // first build semantic model
@@ -85,6 +94,7 @@ namespace AppInterface.Algorithms
                     NumericTypesDeobfuscate();
                     break;
                 case Algorithm.ReplaceOperators:
+                    SimplifyingExpressions();
                     break;
                 case Algorithm.CypherComments:
                     DecypherComments();
