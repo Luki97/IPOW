@@ -10,12 +10,13 @@ namespace AppInterface.Algorithms
 {
     class DeobfuscationManager
     {
+        private readonly SyntaxTree SyntaxTree;
         private CompilationUnitSyntax root;
 
         public DeobfuscationManager(string sourceCode)
         {
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
-            this.root = syntaxTree.GetCompilationUnitRoot();
+            SyntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
+            this.root = SyntaxTree.GetCompilationUnitRoot();
         }
 
         public void NumberWrapper()
@@ -23,6 +24,21 @@ namespace AppInterface.Algorithms
             NumberWrapperDeobfuscator rewriter = new NumberWrapperDeobfuscator();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             Trace.WriteLine("Number wrapper");
+        }
+
+        public void DeadCodeAnnihilation()
+        {
+            // first build semantic model
+            CSharpCompilation compilation = CSharpCompilation.Create(
+                assemblyName: "CodeCompiled",
+                syntaxTrees: new [] { SyntaxTree }
+            );
+            SemanticModel model = compilation.GetSemanticModel(SyntaxTree);
+
+            // rewrite syntax
+            DeadCodeDeobfuscator rewriter = new DeadCodeDeobfuscator(SyntaxTree, model);
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Dead Code Annihilation");
         }
 
         public string GetSourceCode()
@@ -63,6 +79,7 @@ namespace AppInterface.Algorithms
                     NumberWrapper();
                     break;
                 case Algorithm.DeadCodeInjection:
+                    DeadCodeAnnihilation();
                     break;
                 case Algorithm.ChangeNumberBase:
                     NumericTypesDeobfuscate();
