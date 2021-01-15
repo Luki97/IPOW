@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace AppInterface.Algorithms
 {
-    class ClassNamesRewriter : CSharpSyntaxRewriter
+    class ClassNamesObfuscator : CSharpSyntaxRewriter
     {
         private List<string> classNames;
         private List<string> fieldNames;
 
-        public ClassNamesRewriter()
+        public ClassNamesObfuscator()
         {
             this.classNames = new List<string>();
             this.fieldNames = new List<string>();

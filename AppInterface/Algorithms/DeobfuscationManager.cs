@@ -75,6 +75,23 @@ namespace AppInterface.Algorithms
             Trace.WriteLine("Numeric types deobfuscation");
         }
 
+        public void ChangeMethodNames()
+        {
+            MethodNamesDeobfuscator rewriter = new MethodNamesDeobfuscator();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            root = SyntaxFactory.ParseCompilationUnit(rewriter.changeMethodNamesInClass(root.ToFullString()));
+            Trace.WriteLine("Method names obfuscation");
+        }
+
+        public void ChangeClassNames()
+        {
+            ClassNamesDeobfuscator rewriter = new ClassNamesDeobfuscator();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            root = SyntaxFactory.ParseCompilationUnit(rewriter.changeClassNames(root.ToFullString()));
+            root = SyntaxFactory.ParseCompilationUnit(rewriter.changeFieldNames(root.ToFullString()));
+            Trace.WriteLine("Class names deobfuscation");
+        }
+
         public void Deobfuscate(Algorithm algorithm)
         {
             switch (algorithm)
@@ -83,6 +100,8 @@ namespace AppInterface.Algorithms
                     RemoveSemicolns();
                     break;
                 case Algorithm.ChangeClassAndMethodNames:
+                    ChangeClassNames();
+                    ChangeMethodNames();
                     break;
                 case Algorithm.ExtendExpresions:
                     NumberWrapper();

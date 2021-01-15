@@ -31,18 +31,18 @@ namespace AppInterface.Algorithms
 
         public void ChangeMethodNames()
         {
-            MethodNamesRewriter rewriter = new MethodNamesRewriter();
+            MethodNamesObfuscator rewriter = new MethodNamesObfuscator();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             root = SyntaxFactory.ParseCompilationUnit(rewriter.changeMethodNamesInClass(root.ToFullString()));
-            Trace.WriteLine("Method names change");
+            Trace.WriteLine("Method names obfuscation");
         }
         public void ChangeClassNames()
         {
-            ClassNamesRewriter rewriter = new ClassNamesRewriter();
+            ClassNamesObfuscator rewriter = new ClassNamesObfuscator();
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             root = SyntaxFactory.ParseCompilationUnit(rewriter.changeClassNames(root.ToFullString()));
             root = SyntaxFactory.ParseCompilationUnit(rewriter.changeFieldNames(root.ToFullString()));
-            Trace.WriteLine("Class names change");
+            Trace.WriteLine("Class names obfuscation");
         }
 
         public void InsertUnusedSemicolonsIntoMethods()

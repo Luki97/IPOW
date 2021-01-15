@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace AppInterface.Algorithms
 {
-    class MethodNamesRewriter : CSharpSyntaxRewriter
+    class MethodNamesObfuscator : CSharpSyntaxRewriter
     {
         private List<string> methodNames;
 
-        public MethodNamesRewriter()
+        public MethodNamesObfuscator()
         {
             this.methodNames = new List<string>();
         }
