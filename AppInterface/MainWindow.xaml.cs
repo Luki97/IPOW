@@ -88,7 +88,7 @@ namespace AppInterface
         {
             DeobfuscationManager dm = new DeobfuscationManager(CodeIn);
 
-            var algorithms = TakeCheckedAlgorithms();
+            var algorithms = TakeCheckedAlgorithms().Reverse();
 
             foreach(var algorithm in algorithms)
             {
