@@ -59,6 +59,13 @@ namespace AppInterface.Algorithms
 
         }
 
+        public void NumericTypesDeobfuscate()
+        {
+            NumericTypesDeobfuscator rewriter = new NumericTypesDeobfuscator();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Numeric types deobfuscation");
+        }
+
         public void Deobfuscate(Algorithm algorithm)
         {
             switch (algorithm)
@@ -75,6 +82,7 @@ namespace AppInterface.Algorithms
                     DeadCodeAnnihilation();
                     break;
                 case Algorithm.ChangeNumberBase:
+                    NumericTypesDeobfuscate();
                     break;
                 case Algorithm.ReplaceOperators:
                     break;
