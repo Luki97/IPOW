@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 
 namespace AppInterface
 {
@@ -52,6 +53,8 @@ namespace AppInterface
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = FILE_FILTER;
+            openFileDialog.InitialDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\TestData"));
+
             if (openFileDialog.ShowDialog() == true)
             {
                 CodeIn = File.ReadAllText(openFileDialog.FileName);
