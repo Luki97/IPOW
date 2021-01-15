@@ -71,6 +71,7 @@ namespace AppInterface
 
         private void start_obfuscation_btn_Click(object sender, RoutedEventArgs e)
         {
+            CodeIn = tboxCodeIn.Text;
             ObfuscationManager om = new ObfuscationManager(CodeIn);
 
             var algorithms = TakeCheckedAlgorithms();
@@ -86,6 +87,7 @@ namespace AppInterface
 
         private void start_deobfuscation_btn_Click(object sender, RoutedEventArgs e)
         {
+            CodeIn = tboxCodeIn.Text;
             DeobfuscationManager dm = new DeobfuscationManager(CodeIn);
 
             var algorithms = TakeCheckedAlgorithms().Reverse();

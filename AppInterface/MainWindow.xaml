@@ -121,16 +121,16 @@
                     <TextBox
                                 x:Name="tboxCodeIn"
                                 Padding="5"
-                                IsReadOnly="True"
-                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                AcceptsTab="True"
                                 Background="White"/>
                 </ScrollViewer>
                 <ScrollViewer Margin="7" Grid.Column="1">
                     <TextBox
                                 x:Name="tboxCodeOut"
                                 Padding="5"
-                                IsReadOnly="True"
-                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                AcceptsTab="True"
                                 Background="White"/>
                 </ScrollViewer>
             </Grid>
