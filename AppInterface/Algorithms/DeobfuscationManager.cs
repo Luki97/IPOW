@@ -10,12 +10,13 @@ namespace AppInterface.Algorithms
 {
     class DeobfuscationManager
     {
+        private readonly SyntaxTree SyntaxTree;
         private CompilationUnitSyntax root;
 
         public DeobfuscationManager(string sourceCode)
         {
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
-            this.root = syntaxTree.GetCompilationUnitRoot();
+            SyntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
+            this.root = SyntaxTree.GetCompilationUnitRoot();
         }
 
         public void NumberWrapper()
@@ -32,6 +33,21 @@ namespace AppInterface.Algorithms
             root = (CompilationUnitSyntax)rewriter.Visit(root);
             root = (CompilationUnitSyntax)rewriter2.Visit(root);
             Trace.WriteLine("Simplyfing expression");
+        }
+
+        public void DeadCodeAnnihilation()
+        {
+            // first build semantic model
+            CSharpCompilation compilation = CSharpCompilation.Create(
+                assemblyName: "CodeCompiled",
+                syntaxTrees: new [] { SyntaxTree }
+            );
+            SemanticModel model = compilation.GetSemanticModel(SyntaxTree);
+
+            // rewrite syntax
+            DeadCodeDeobfuscator rewriter = new DeadCodeDeobfuscator(SyntaxTree, model);
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Dead Code Annihilation");
         }
 
         public string GetSourceCode()
@@ -52,6 +68,13 @@ namespace AppInterface.Algorithms
 
         }
 
+        public void NumericTypesDeobfuscate()
+        {
+            NumericTypesDeobfuscator rewriter = new NumericTypesDeobfuscator();
+            root = (CompilationUnitSyntax)rewriter.Visit(root);
+            Trace.WriteLine("Numeric types deobfuscation");
+        }
+
         public void Deobfuscate(Algorithm algorithm)
         {
             switch (algorithm)
@@ -65,8 +88,10 @@ namespace AppInterface.Algorithms
                     NumberWrapper();
                     break;
                 case Algorithm.DeadCodeInjection:
+                    DeadCodeAnnihilation();
                     break;
                 case Algorithm.ChangeNumberBase:
+                    NumericTypesDeobfuscate();
                     break;
                 case Algorithm.ReplaceOperators:
                     SimplifyingExpressions();
