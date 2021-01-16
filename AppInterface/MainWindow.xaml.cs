@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 
 namespace AppInterface
 {
@@ -52,6 +53,8 @@ namespace AppInterface
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = FILE_FILTER;
+            openFileDialog.InitialDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\TestData"));
+
             if (openFileDialog.ShowDialog() == true)
             {
                 CodeIn = File.ReadAllText(openFileDialog.FileName);
@@ -71,6 +74,7 @@ namespace AppInterface
 
         private void start_obfuscation_btn_Click(object sender, RoutedEventArgs e)
         {
+            CodeIn = tboxCodeIn.Text;
             ObfuscationManager om = new ObfuscationManager(CodeIn);
 
             var algorithms = TakeCheckedAlgorithms();
@@ -86,6 +90,7 @@ namespace AppInterface
 
         private void start_deobfuscation_btn_Click(object sender, RoutedEventArgs e)
         {
+            CodeIn = tboxCodeIn.Text;
             DeobfuscationManager dm = new DeobfuscationManager(CodeIn);
 
             var algorithms = TakeCheckedAlgorithms().Reverse();
